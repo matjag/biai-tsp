@@ -7,32 +7,33 @@ import java.util.Scanner;
 
 public class TSPGraph {
 
+
     private int numberOfCities;
     private float[][] distanceArray;
+
+    public int getNumberOfCities() {
+        return numberOfCities;
+    }
+
+    public float getDistanceBetweenCities(int first, int second){
+        return distanceArray[first][second];
+    }
 
     public void initializeFromFile(String fileName) {
 
         ArrayList<String> input = loadFile(fileName);
-        input.forEach(System.out::println);
 
         numberOfCities = extractNumberOfCitiesFromInput(input.get(input.size() - 2));
         distanceArray = new float[numberOfCities][numberOfCities];
         float[][] coordinatesArray = extractCoordinates(input);
         parseCoordinatesArrayToDistanceArray(coordinatesArray);
-
-
-
-//        for(int i = 0; i<numberOfCities; i++){
-//            for(int j = 0; j<numberOfCities;j++)
-//                System.out.print(distanceArray[i][j] + " ");
-//            System.out.println();
-//        }
-
     }
 
-    public TSPGraph(String fileName){
+    public TSPGraph(String fileName) {
         initializeFromFile(fileName);
     }
+
+
     /**
      * Method that loads raw TSP file
      *
@@ -82,13 +83,13 @@ public class TSPGraph {
                 coordinatesSectionLineNumber = lineNumber;
             }
         }
-        System.out.println(coordinatesArray.length);
 
         return coordinatesArray;
     }
 
     /**
      * Calculates a distance between each two cities
+     *
      * @param coordinatesArray coordinates of cities
      */
     private void parseCoordinatesArrayToDistanceArray(float[][] coordinatesArray) {
@@ -108,11 +109,10 @@ public class TSPGraph {
     }
 
     /**
-     *
      * @param input second last line of input file
      * @return number of cities in given TSP dataset
      */
-    private int extractNumberOfCitiesFromInput(String input){
+    private int extractNumberOfCitiesFromInput(String input) {
         int i = 0;
         while (i < input.length() && !Character.isDigit(input.charAt(i))) i++;
         int j = i;
