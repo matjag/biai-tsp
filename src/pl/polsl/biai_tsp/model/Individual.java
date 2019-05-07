@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Individual {
     List<Integer> route = new ArrayList<>();
-    Float routeLength;
+    Long routeLength;
     TSPGraph graph;
 
     public List<Integer> getSolution() {
@@ -30,8 +30,8 @@ public class Individual {
         route.add(route.get(0));
     }
 
-    public Float calculateRouteLength() {
-        routeLength = 0f;
+    public Long calculateRouteLength() {
+        routeLength = 0L;
         for (int i = 1; i < route.size(); i++) {
             routeLength += graph.getDistanceBetweenCities(route.get(i), route.get(i - 1));
         }
