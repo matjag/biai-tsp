@@ -9,13 +9,13 @@ public class TSPGraph {
 
 
     private int numberOfCities;
-    private Long[][] distanceArray;
+    private Double[][] distanceArray;
 
     public int getNumberOfCities() {
         return numberOfCities;
     }
 
-    public Long getDistanceBetweenCities(int first, int second){
+    public Double getDistanceBetweenCities(int first, int second){
         return distanceArray[first][second];
     }
 
@@ -24,7 +24,7 @@ public class TSPGraph {
         ArrayList<String> input = loadFile(fileName);
 
         numberOfCities = extractNumberOfCitiesFromInput(input.get(input.size() - 2));
-        distanceArray = new Long[numberOfCities][numberOfCities];
+        distanceArray = new Double[numberOfCities][numberOfCities];
         float[][] coordinatesArray = extractCoordinates(input);
         parseCoordinatesArrayToDistanceArray(coordinatesArray);
     }
@@ -94,7 +94,7 @@ public class TSPGraph {
      */
     private void parseCoordinatesArrayToDistanceArray(float[][] coordinatesArray) {
         for (int firstCity = 0; firstCity < numberOfCities; firstCity++) {
-            distanceArray[firstCity][firstCity] = 0L;
+            distanceArray[firstCity][firstCity] = 0.0;
 
             for (int secondCity = firstCity + 1; secondCity < numberOfCities; secondCity++) {
                 float xDifference;
@@ -102,7 +102,7 @@ public class TSPGraph {
 
                 xDifference = coordinatesArray[firstCity][0] - coordinatesArray[secondCity][0];
                 yDifference = coordinatesArray[firstCity][1] - coordinatesArray[secondCity][1];
-                distanceArray[firstCity][secondCity] = (long)Math.sqrt(Math.pow(xDifference, 2) + Math.pow(yDifference, 2));
+                distanceArray[firstCity][secondCity] = Math.sqrt(Math.pow(xDifference, 2) + Math.pow(yDifference, 2));
                 distanceArray[secondCity][firstCity] = distanceArray[firstCity][secondCity];
             }
         }
