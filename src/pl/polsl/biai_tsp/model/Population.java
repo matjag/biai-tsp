@@ -12,7 +12,7 @@ public class Population {
         Individual individual;
         for (int i = 0; i < generationSize; i++) {
             individual = new Individual(graph);
-            individual.createRandomSolution();
+            individual.createRandomRoute();
             generation.add(individual);
         }
     }

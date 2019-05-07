@@ -5,13 +5,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class Individual {
-    List<Integer> solution = new ArrayList<>();
+    List<Integer> route = new ArrayList<>();
     Float routeLength;
     TSPGraph graph;
 
-
     public List<Integer> getSolution() {
-        return solution;
+        return route;
     }
 
     public void setGraph(TSPGraph graph) {
@@ -22,21 +21,20 @@ public class Individual {
         this.graph = graph;
     }
 
-    public void createRandomSolution() {
-        solution.clear();
+    public void createRandomRoute() {
+        route.clear();
         for (int i = 0; i < graph.getNumberOfCities(); i++) {
-            solution.add(i);
+            route.add(i);
         }
-        Collections.shuffle(solution);
-        solution.add(solution.get(0));
+        Collections.shuffle(route);
+        route.add(route.get(0));
     }
 
     public Float calculateRouteLength() {
         routeLength = 0f;
-        for (int i = 1; i < solution.size(); i++) {
-            routeLength += graph.getDistanceBetweenCities(solution.get(i), solution.get(i - 1));
+        for (int i = 1; i < route.size(); i++) {
+            routeLength += graph.getDistanceBetweenCities(route.get(i), route.get(i - 1));
         }
         return routeLength;
     }
-
 }
